@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
+    <RootNamespace>Loan_System</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\approved.png" />
+    <None Remove="icons\close.png" />
+    <None Remove="icons\home.png" />
+    <None Remove="icons\max.png" />
+    <None Remove="icons\menu.png" />
+    <None Remove="icons\min.png" />
+    <None Remove="icons\no.png" />
+    <None Remove="icons\pendin.png" />
+    <None Remove="icons\reject.png" />
+    <None Remove="icons\send.png" />
+    <None Remove="icons\settings.png" />
+    <None Remove="icons\wait.png" />
+    <None Remove="icons\yes.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\approved.png" />
+    <Resource Include="icons\close.png" />
+    <Resource Include="icons\home.png" />
+    <Resource Include="icons\max.png" />
+    <Resource Include="icons\menu.png" />
+    <Resource Include="icons\min.png" />
+    <Resource Include="icons\no.png" />
+    <Resource Include="icons\pendin.png" />
+    <Resource Include="icons\reject.png" />
+    <Resource Include="icons\send.png" />
+    <Resource Include="icons\settings.png" />
+    <Resource Include="icons\wait.png" />
+    <Resource Include="icons\yes.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>
