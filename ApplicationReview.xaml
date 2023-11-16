@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Loan_System"
         mc:Ignorable="d"
-        Title="Application Review" Height="700" Width="1200" MinHeight="400" MinWidth="400"
+        Title="Application Review" Height="900" Width="1100" MinHeight="900" MinWidth="900"
         Background="Transparent"
         ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         WindowStyle="None"
         >
 
-    <Border x:Name="windowBorder" Background="#FFF1F1F1" MouseLeftButtonDown="windowBorder_MouseLeftButtonDown" BorderBrush="Black" BorderThickness="0.75" CornerRadius="12" >
+    <Border x:Name="windowBorder" Background="#FFF7F3F3" MouseLeftButtonDown="windowBorder_MouseLeftButtonDown" BorderBrush="Black" BorderThickness="0.75" CornerRadius="12" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="34*"/>
@@ -58,6 +58,7 @@
                 </Button>
 
             </Grid>
+            
             <Grid x:Name="menuGrid" Grid.Row="1" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40*"/>
@@ -85,11 +86,11 @@
 
                 <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" Orientation="Horizontal">
                     <Image Source="icons\menu.png" Width="30"/>
-                    <TextBlock  Text="ACTIONS TAB" TextDecorations="Underline" FontSize="18" Margin="10,6,0,0"/>
+                    <TextBlock  Text="APPLICANT TAB" TextDecorations="Underline" FontSize="18" Margin="10,6,0,0"/>
 
                 </StackPanel>
 
-                <Button x:Name="rejectBtn" Cursor="Hand" Click="rejectBtn_Click" Background="#66EF5F94" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" Margin="6,7,6,7">
+                <Button x:Name="rejectBtn" Cursor="Hand" Click="rejectBtn_Click" Background="#66EF5F94" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" Margin="6,7,6,7">
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="icons\send.png" Width="30"/>
@@ -97,15 +98,15 @@
                     </StackPanel>
 
                 </Button>
-                <Button x:Name="waitapprovalBtn" Cursor="Hand" Click="waitapprovalBtn_Click" Background="#665F9DEF" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="1" Margin="6,6,6,6">
+                <Button x:Name="waitapprovalBtn" Cursor="Hand" Click="waitapprovalBtn_Click" Background="#665F9DEF" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" Margin="6,6,6,6">
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="icons\send.png" Width="30"/>
-                        <TextBlock Text="Waiting Approval email "/>
+                        <TextBlock Text="Waiting email "/>
                     </StackPanel>
 
                 </Button>
-                <Button x:Name="approvedBtn" Cursor="Hand" Click="approvedBtn_Click" Background="#665FEF6E" Grid.ColumnSpan="2" Grid.Row="7" Grid.Column="1" Margin="6,7,6,7">
+                <Button x:Name="approvedBtn" Cursor="Hand" Click="approvedBtn_Click" Background="#665FEF6E" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="1" Margin="6,7,6,7">
 
                     <StackPanel Orientation="Horizontal">
                         <Image Source="icons\send.png" Width="30"/>
@@ -116,21 +117,77 @@
 
             </Grid>
 
-            <Grid x:Name="rectanglesGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                <Rectangle  Stroke="Black"  RadiusX="10" RadiusY="10" StrokeThickness="0.6" Margin="15" />
+            <Grid x:Name="rectanglesGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="676*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Rectangle  Stroke="#FFA5A5A5" RadiusX="10" RadiusY="10" StrokeThickness="0.42" Margin="15,15,15,2" />
+                <ProgressBar Name="loadingIndicator" IsIndeterminate="True" Margin="15,0,15,0" Visibility="Collapsed"  Foreground="#FF4AB150" Grid.Row="1"/>
+
             </Grid>
-            <Grid x:Name="dashboardGrid" Background="White" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="40">
+
+            <Grid x:Name="dashboardGrid" Background="White" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="40" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="271*"/>
                     <ColumnDefinition Width="495*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="143*"/>
-                    <RowDefinition Height="412*"/>
+                    <RowDefinition Height="365*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Name="namelabel" Margin="10,0,0,0"/>
-                <TextBlock Name="idlabel" Margin="90,0,0,0"/>
-                <TextBlock Name="timelabel" Margin="170,0,0,0"/>
+                <Image Source="icons\person.png" MaxHeight="65" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="60,0,0,50"  Width="50" Height="50">
+
+                </Image>
+
+                <StackPanel x:Name="topStack" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical" Margin="140,0,140,0" >
+
+                    <TextBox Name="namelabel" Height="46" FontSize="26" Foreground="DarkSlateGray" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent"/>
+                    <TextBox Name="idlabel" Height="46" FontSize="24" Foreground="DarkSlateGray" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent"/>
+                    <TextBox Name="timelabel" Height="46" FontSize="20" Foreground="#FF314A77"  TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent"/>
+
+                </StackPanel>
+
+                <StackPanel x:Name="rightStack" Grid.Row="1" Grid.Column="1" CanVerticallyScroll="True" Grid.RowSpan="2">
+                    <TextBox Name="agelabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+                    <TextBox Name="sexlabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+                    <TextBox Name="occupationlabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+
+                    <TextBox Name="durationlabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+                    <TextBox Name="amountlabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+
+                    <TextBox Name="phonelabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+                    <TextBox Name="emaillabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF157173"/>
+                    <TextBox Name="statuslabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" FontWeight="Bold"/>
+                    <TextBox Name="updatelabel" Height="36" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" Foreground="#FF314A77"/>
+                    <TextBox Name="essaylabel" Height="100" FontSize="16" TextAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" BorderBrush="Transparent" FontStyle="Italic"/>
+                    <Button Click="idphoto_click" Height="36" BorderBrush="Transparent" Background="#7FDDDDDD">
+                        <TextBox Name="idphotolabel" IsReadOnly="True" BorderThickness="0" TextAlignment="Left" Background="Transparent"/>
+                    </Button>
+                    <Button Click="payslip_click" Height="36" BorderBrush="Transparent" Background="#7FDDDDDD">
+                        <TextBox  Name="paysliphotolabel" IsReadOnly="True" BorderThickness="0" TextAlignment="Left" Background="Transparent" />
+                    </Button>
+                </StackPanel>
+
+                <StackPanel x:Name="leftStack" Grid.Row="1" Grid.Column="0" Margin="90,0,0,0" Grid.RowSpan="2">
+                    <TextBlock Name="agelabelx" Height="36" FontSize="14" TextAlignment="Left" Text="AGE:"/>
+                    <TextBlock Name="sexlabelx" Height="36" FontSize="14" TextAlignment="Left" Text="SEX:"/>
+                    <TextBlock Name="occupationlabelx" Height="36" FontSize="14" TextAlignment="Left" Text="OCCUPATION"/>
+
+                    <TextBlock Name="durationlabelx" Height="36" FontSize="14" TextAlignment="Left" Text="LOAN DURATION:"/>
+                    <TextBlock Name="amountlabelx" Height="36" FontSize="14" TextAlignment="Left" Text="LOAN AMOUNT:"/>
+
+                    <TextBlock Name="phonelabelx" Height="36" FontSize="14" TextAlignment="Left" Text="MPESA NUMBER:"/>
+                    <TextBlock Name="emaillabelx" Height="36" FontSize="14" TextAlignment="Left" Text="EMAIL:"/>
+                    <TextBlock Name="statuslabelx" Height="36" FontSize="14" TextAlignment="Left" Text="STATUS:"/>
+                    <TextBlock Name="updatelabelx" Height="36" FontSize="14" TextAlignment="Left" Text="TIME OF UPDATE:"/>
+                    <TextBlock Name="essaylabelx" Height="100" FontSize="14" TextAlignment="Left" Text="APPLICANT ESSAY:"/>
+                    <TextBlock Name="imageslabelx" Height="36" FontSize="14" TextAlignment="Left" Text="GOVERNMENT_ID PHOTO:" />
+                    <TextBlock Name="paysliplabelx"  Height="36" FontSize="14" TextAlignment="Left" Text="PAYSLIP PHOTO:" />
+
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Border>

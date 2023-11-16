@@ -25,3 +25,4 @@ C:\Users\mule\source\repos\Loan System\obj\x64\Debug\net6.0-windows10.0.17763.0\
 C:\Users\mule\source\repos\Loan System\obj\x64\Debug\net6.0-windows10.0.17763.0\Loan System.genruntimeconfig.cache
 C:\Users\mule\source\repos\Loan System\obj\x64\Debug\net6.0-windows10.0.17763.0\ref\Loan System.dll
 C:\Users\mule\source\repos\Loan System\bin\x64\Debug\net6.0-windows10.0.17763.0\Newtonsoft.Json.dll
+C:\Users\mule\source\repos\Loan System\obj\x64\Debug\net6.0-windows10.0.17763.0\Loan System_Content.g.cs

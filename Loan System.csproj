@@ -7,11 +7,14 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <ApplicationIcon>heartfolder.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="heartfolder.ico" />
     <None Remove="icons\approved.png" />
+    <None Remove="icons\attachment.png" />
     <None Remove="icons\close.png" />
     <None Remove="icons\home.png" />
     <None Remove="icons\max.png" />
@@ -19,6 +22,8 @@
     <None Remove="icons\min.png" />
     <None Remove="icons\no.png" />
     <None Remove="icons\pendin.png" />
+    <None Remove="icons\person.png" />
+    <None Remove="icons\refresh.png" />
     <None Remove="icons\reject.png" />
     <None Remove="icons\send.png" />
     <None Remove="icons\settings.png" />
@@ -27,7 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="heartfolder.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="heartfolder.ico" />
     <Resource Include="icons\approved.png" />
+    <Resource Include="icons\attachment.png" />
     <Resource Include="icons\close.png" />
     <Resource Include="icons\home.png" />
     <Resource Include="icons\max.png" />
@@ -35,6 +46,8 @@
     <Resource Include="icons\min.png" />
     <Resource Include="icons\no.png" />
     <Resource Include="icons\pendin.png" />
+    <Resource Include="icons\person.png" />
+    <Resource Include="icons\refresh.png" />
     <Resource Include="icons\reject.png" />
     <Resource Include="icons\send.png" />
     <Resource Include="icons\settings.png" />

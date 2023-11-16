@@ -1,0 +1,28 @@
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Loan System.exe
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Loan System.deps.json
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Loan System.runtimeconfig.json
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Loan System.dll
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Loan System.pdb
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Newtonsoft.Json.dll
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\Microsoft.Windows.SDK.NET.dll
+C:\Users\mule\source\repos\Loan System\bin\x86\Debug\net6.0-windows10.0.17763.0\WinRT.Runtime.dll
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.csproj.AssemblyReference.cache
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\ApplicationReview.g.cs
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\MainWindow.g.cs
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\App.g.cs
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System_Content.g.cs
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System_MarkupCompile.cache
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System_MarkupCompile.lref
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\ApplicationReview.baml
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\MainWindow.baml
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.g.resources
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.AssemblyInfoInputs.cache
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.AssemblyInfo.cs
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.csproj.CoreCompileInputs.cache
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.csproj.CopyComplete
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.dll
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\refint\Loan System.dll
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.pdb
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\Loan System.genruntimeconfig.cache
+C:\Users\mule\source\repos\Loan System\obj\x86\Debug\net6.0-windows10.0.17763.0\ref\Loan System.dll

@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2 import service_account
+
 # Define the scope and credentials
 scope = [
 "https://www.googleapis.com/auth/drive", \
@@ -38,19 +39,8 @@ def select_by_column(column, value):
         print('Column not in User Details')
         return None
 
-def get_pending():
-    return select_by_column('Status', '')
-def get_rejected():
-    return select_by_column('Status', 'rejected')
 def get_accepted():
-    return select_by_column('Status', 'approved')
-
-def get_phone(number):
-    return select_by_column('MPESA NUMBER', number)
-def get_email(email):
-    return select_by_column('EMAIL', email)
-def get_occupation(occupation):
-    return select_by_column('OCCUPATION', occupation)
+    return select_by_column('Status', 'accepted')
 
 accepted_applications = get_accepted()
 

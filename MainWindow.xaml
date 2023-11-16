@@ -13,7 +13,7 @@
         
         >
 
-    <Border x:Name="windowBorder" MouseLeftButtonDown="windowBorder_MouseLeftButtonDown" Background="#FFF1F1F1" BorderBrush="Black" BorderThickness="0.75" CornerRadius="12" >
+    <Border x:Name="windowBorder" MouseLeftButtonDown="windowBorder_MouseLeftButtonDown" Background="#FFF9F9F9" BorderBrush="Black" BorderThickness="0.75" CornerRadius="12" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="34*"/>
@@ -86,7 +86,7 @@
                     <Image Source="icons\home.png" Width="30" Margin="5,0,0,0">
                     </Image>
                     <TextBlock Name="dashB"  Text="DASHBOARD" TextDecorations="Underline" FontSize="18" Margin="10,10,0,0">
-                        
+
                     </TextBlock>
 
                 </StackPanel>
@@ -112,11 +112,25 @@
                         <TextBlock Text="REJECTED "/>
                     </StackPanel>
                 </Button>
+                <Button x:Name="refreshBtn" Click="refreshBtn_Click" Cursor="Hand" Background="#FFFFF29E" Grid.ColumnSpan="2"  Grid.Row="9" Grid.Column="1" Margin="6.5">
+
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="icons\refresh.png" Width="30"/>
+                        <TextBlock Text="REFRESH APPLICATIONS "/>
+                    </StackPanel>
+                </Button>
 
             </Grid>
-            
-            <Grid x:Name="rectanglesGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-                <Rectangle  Stroke="Black" RadiusX="10" RadiusY="10" StrokeThickness="0.6" Margin="15" />
+
+            <Grid x:Name="rectanglesGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#C1FFFFFF">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="676*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Rectangle  Stroke="#FFA5A5A5" RadiusX="10" RadiusY="10" StrokeThickness="0.42" Margin="15,15,15,2" />
+                <ProgressBar Name="loadingIndicator" IsIndeterminate="True" Margin="15,0,15,0" Visibility="Collapsed"  Foreground="#FF4AB150" Grid.Row="1"/>
+
             </Grid>
 
             <Grid x:Name="pendingGrid" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="40" Visibility="Visible">
@@ -127,10 +141,14 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Name="pendingTitle" Grid.Column="1" Grid.Row="0" TextDecorations="Underline" HorizontalAlignment="Center" FontSize="23" Text="PENDING APPLICATIONS" Width="253" Foreground="#FF55555D" >
-                    
+
                 </TextBlock>
 
-                <ListView x:Name="pending_ListView" SelectionChanged="userinfo_ListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2">
+                <TextBox x:Name="pending_searchTextBox" Grid.Row="1" TextAlignment="Center" FontStyle="Italic" Foreground="#FF314A77" FontSize="18" TextChanged="Pending_SearchTextBox_TextChanged" HorizontalAlignment="Center" Width="400" Height="25" >
+                    
+                </TextBox>
+
+                <ListView x:Name="pending_ListView" SelectionChanged="userinfo_pendingListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" Background="Transparent" FontSize="16">
                     <ListView.View>
                         <GridView>
 
@@ -141,7 +159,6 @@
                             <GridViewColumn Header="Sex" Width="70" DisplayMemberBinding="{Binding Sex}" />
                             <GridViewColumn Header="Occupation" Width="120" DisplayMemberBinding="{Binding Occupation}" />
                             <GridViewColumn Header="ID Number" Width="100" DisplayMemberBinding="{Binding Government_ID}" />
-                            <GridViewColumn Header="Time of Update" Width="150" DisplayMemberBinding="{Binding Time_of_Update}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -155,26 +172,22 @@
                     <RowDefinition Height="535*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="0" TextDecorations="Underline" HorizontalAlignment="Center" FontSize="23" Text="ACCEPTED APPLICATIONS" Foreground="#FF61B135"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" TextDecorations="Underline" HorizontalAlignment="Center" FontSize="23" Text="ACCEPTED APPLICATIONS" Foreground="#FF55555D" />
 
-                <ListView x:Name="accepted_ListView" SelectionChanged="userinfo_ListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2">
+                <TextBox x:Name="accepted_searchTextBox" TextAlignment="Center"  FontStyle="Italic" Foreground="#FF314A77" FontSize="18" Grid.Row="1" TextChanged="Accepted_SearchTextBox_TextChanged" HorizontalAlignment="Center" Width="400" Height="25">
+
+                </TextBox>
+                
+                <ListView x:Name="accepted_ListView" SelectionChanged="userinfo_acceptedListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" Background="Transparent" FontSize="16">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Timestamp" Width="150" DisplayMemberBinding="{Binding Timestamp}" />
-                            <GridViewColumn Header="Official Name" Width="340" DisplayMemberBinding="{Binding Official_Name}" />
-                            <GridViewColumn Header="Age" Width="70" DisplayMemberBinding="{Binding Age}" />
-                            <GridViewColumn Header="Sex" Width="150" DisplayMemberBinding="{Binding Sex}" />
-                            <GridViewColumn Header="ID Number" Width="100" DisplayMemberBinding="{Binding Government_ID}" />
-                            <GridViewColumn Header="ID Photo" Width="100" DisplayMemberBinding="{Binding Government_ID_Photo}" />
-                            <GridViewColumn Header="Occupation" Width="150" DisplayMemberBinding="{Binding Occupation}" />
-                            <GridViewColumn Header="PayslipImage" Width="150" DisplayMemberBinding="{Binding PaySlipImage}" />
+                            <GridViewColumn Header="Official Name" Width="310" DisplayMemberBinding="{Binding Official_Name}" />
                             <GridViewColumn Header="Loan Duration" Width="150" DisplayMemberBinding="{Binding LoanDuration}" />
                             <GridViewColumn Header="Loan Amount" Width="150" DisplayMemberBinding="{Binding LoanAmount}" />
-                            <GridViewColumn Header="Phone No." Width="150" DisplayMemberBinding="{Binding PhoneNo}" />
-                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
-                            <GridViewColumn Header="Applicant Essay" Width="150" DisplayMemberBinding="{Binding ApplicantEssay}" />
-                            <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding Status}" />
-                            <GridViewColumn Header="Time of Update" Width="150" DisplayMemberBinding="{Binding Time_of_Update}" />
+                            <GridViewColumn Header="Age" Width="70" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="Sex" Width="70" DisplayMemberBinding="{Binding Sex}" />
+                            <GridViewColumn Header="Occupation" Width="120" DisplayMemberBinding="{Binding Occupation}" />
+                            <GridViewColumn Header="ID Number" Width="100" DisplayMemberBinding="{Binding Government_ID}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -188,26 +201,22 @@
                     <RowDefinition Height="535*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Grid.Row="0" TextDecorations="Underline" HorizontalAlignment="Center" FontSize="23" Text="REJECTED APPLICATIONS" Foreground="#FFB13551"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" TextDecorations="Underline" HorizontalAlignment="Center" FontSize="23" Text="REJECTED APPLICATIONS" Foreground="#FF55555D" />
 
-                <ListView x:Name="rejected_ListView" SelectionChanged="userinfo_ListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2">
+                <TextBox x:Name="rejected_searchTextBox" Grid.Row="1" TextChanged="Rejected_SearchTextBox_TextChanged"  FontStyle="Italic" Foreground="#FF314A77" FontSize="18" TextAlignment="Center" HorizontalAlignment="Center" Width="400" Height="25">
+
+                </TextBox>
+                
+                <ListView x:Name="rejected_ListView" SelectionChanged="userinfo_rejectedListView_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="2" Background="Transparent" FontSize="16">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Timestamp" Width="150" DisplayMemberBinding="{Binding Timestamp}" />
-                            <GridViewColumn Header="Official Name" Width="340" DisplayMemberBinding="{Binding Official_Name}" />
-                            <GridViewColumn Header="Age" Width="70" DisplayMemberBinding="{Binding Age}" />
-                            <GridViewColumn Header="Sex" Width="150" DisplayMemberBinding="{Binding Sex}" />
-                            <GridViewColumn Header="ID Number" Width="100" DisplayMemberBinding="{Binding Government_ID}" />
-                            <GridViewColumn Header="ID Photo" Width="100" DisplayMemberBinding="{Binding Government_ID_Photo}" />
-                            <GridViewColumn Header="Occupation" Width="150" DisplayMemberBinding="{Binding Occupation}" />
-                            <GridViewColumn Header="PayslipImage" Width="150" DisplayMemberBinding="{Binding PaySlipImage}" />
+                            <GridViewColumn Header="Official Name" Width="310" DisplayMemberBinding="{Binding Official_Name}" />
                             <GridViewColumn Header="Loan Duration" Width="150" DisplayMemberBinding="{Binding LoanDuration}" />
                             <GridViewColumn Header="Loan Amount" Width="150" DisplayMemberBinding="{Binding LoanAmount}" />
-                            <GridViewColumn Header="Phone No." Width="150" DisplayMemberBinding="{Binding PhoneNo}" />
-                            <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}" />
-                            <GridViewColumn Header="Applicant Essay" Width="150" DisplayMemberBinding="{Binding ApplicantEssay}" />
-                            <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding Status}" />
-                            <GridViewColumn Header="Time of Update" Width="150" DisplayMemberBinding="{Binding Time_of_Update}" />
+                            <GridViewColumn Header="Age" Width="70" DisplayMemberBinding="{Binding Age}" />
+                            <GridViewColumn Header="Sex" Width="70" DisplayMemberBinding="{Binding Sex}" />
+                            <GridViewColumn Header="Occupation" Width="120" DisplayMemberBinding="{Binding Occupation}" />
+                            <GridViewColumn Header="ID Number" Width="100" DisplayMemberBinding="{Binding Government_ID}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

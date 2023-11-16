@@ -38,19 +38,8 @@ def select_by_column(column, value):
         print('Column not in User Details')
         return None
 
-def get_pending():
-    return select_by_column('Status', '')
 def get_rejected():
     return select_by_column('Status', 'rejected')
-def get_approved():
-    return select_by_column('Status', 'approved')
-
-def get_phone(number):
-    return select_by_column('MPESA NUMBER', number)
-def get_email(email):
-    return select_by_column('EMAIL', email)
-def get_occupation(occupation):
-    return select_by_column('OCCUPATION', occupation)
 
 rejected_applications = get_rejected()
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,6 +30,7 @@ namespace Loan_System
         public string? Status { get; set; }
         public string? Time_of_Update { get; set; }
     }
+    
     //main window class
     public partial class MainWindow : Window
     {
@@ -65,7 +67,7 @@ namespace Loan_System
         }
         
         //run python 
-        private void RunPythonScript(string filepath, string textpath)
+        private async Task RunPythonScript(string filepath, string textpath)
         {
             try
             { 
@@ -74,7 +76,7 @@ namespace Loan_System
 
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
-                    FileName = "python", // Assuming "python" is in the system PATH
+                    FileName = "python", // runs python application
                     Arguments = scriptPath,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -87,11 +89,11 @@ namespace Loan_System
                     process.Start();
 
                     // If you want to read the output of the Python script, you can do so
-                    string output = process.StandardOutput.ReadToEnd();
+                    string output = await process.StandardOutput.ReadToEndAsync();
                     // Read the error output of the Python script
-                    string error = process.StandardError.ReadToEnd();
+                    string error = await process.StandardError.ReadToEndAsync();
                     File.WriteAllText(textpath, output);
-                    //MessageBox.Show($"Python script output:\n{output}\n\nError:\n{error}");
+
                     process.WaitForExit();
                 }
             }
@@ -155,19 +157,7 @@ namespace Loan_System
                 pendingGrid.Visibility = Visibility.Visible;
                 acceptedGrid.Visibility = Visibility.Collapsed;
                 rejectedGrid.Visibility = Visibility.Collapsed;
-            //run the python code
-            RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\pending.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\pending_applications.txt");
-
-            //interprete the data
-            try
-            {
-                pending_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\pending_applications.txt");
-            }
-            catch (Exception ex)
-            {
-                string excep = ex.Message.ToString();
-                MessageBox.Show(excep);
-            }
+            
         }
         private void acceptedBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -175,19 +165,7 @@ namespace Loan_System
             pendingGrid.Visibility = Visibility.Collapsed;
             acceptedGrid.Visibility = Visibility.Visible;
             rejectedGrid.Visibility = Visibility.Collapsed;
-            //run the python code
-            RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\accepted.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\accepted_applications.txt");
-
-            //interprete the data
-            try
-            {
-                pending_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\accepted_applications.txt");
-            }
-            catch (Exception ex)
-            {
-                string excep = ex.Message.ToString();
-                MessageBox.Show(excep);
-            }
+            
         }
         private void rejectedBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -195,13 +173,31 @@ namespace Loan_System
             pendingGrid.Visibility = Visibility.Collapsed;
             acceptedGrid.Visibility = Visibility.Collapsed;
             rejectedGrid.Visibility = Visibility.Visible;
-            //run the python code
-            RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\rejected.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\rejected_applications.txt");
+            
+        }
 
-            //interprete the data
+        //refresh applications
+        private async void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //loading start
+            loadingIndicator.Visibility = Visibility.Visible;
+            refreshBtn.Visibility = Visibility.Collapsed;
+
+            //run the all python API's
+            await RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\pending.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\pending_applications.txt");
+            await RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\accepted.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\accepted_applications.txt");
+            await RunPythonScript(@"""C:\Users\mule\source\repos\Loan System\py\rejected.py""", "C:\\Users\\mule\\source\\repos\\Loan System\\text\\rejected_applications.txt");
+
+            //loading end
+            loadingIndicator.Visibility = Visibility.Collapsed;
+            refreshBtn.Visibility = Visibility.Visible;
+
+            //display the data
             try
             {
-                pending_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\rejected_applications.txt");
+                pending_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\pending_applications.txt");
+                accepted_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\accepted_applications.txt");
+                rejected_ListView.ItemsSource = ReadDataFromFile("C:\\Users\\mule\\source\\repos\\Loan System\\text\\rejected_applications.txt");
             }
             catch (Exception ex)
             {
@@ -209,19 +205,28 @@ namespace Loan_System
                 MessageBox.Show(excep);
             }
         }
-        
-        //send selected applicant details to new window
-        private void userinfo_ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (pending_ListView.SelectedItem != null)
-            {
-                // Access the selected item (Person object)
-                Applicant selectedApplicant = (Applicant)pending_ListView.SelectedItem;
 
-                // Execute your function with the selected data
-                // For example, open a new window with the data
-                OpenNewWindowWithData(selectedApplicant);
-            }
+        //open new window
+        private void userinfo_pendingListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Applicant selectedApplicant = (Applicant)pending_ListView.SelectedItem;
+
+            OpenNewWindowWithData(selectedApplicant);
+            
+        }
+        private void userinfo_acceptedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Applicant selectedApplicant = (Applicant)accepted_ListView.SelectedItem;
+
+            OpenNewWindowWithData(selectedApplicant);
+
+        }
+        private void userinfo_rejectedListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Applicant selectedApplicant = (Applicant)rejected_ListView.SelectedItem;
+
+            OpenNewWindowWithData(selectedApplicant);
+
         }
         private void OpenNewWindowWithData(Applicant selectedApplicant)
         {
@@ -230,11 +235,115 @@ namespace Loan_System
 
             // Pass the data to the new window (assuming MyNewWindow has a method to accept data)
             newWindow.SetData(selectedApplicant);
+            
+            //write data to a txt file
+            newWindow.WriteToFile(selectedApplicant);
 
             // Show the new window
             newWindow.Show();
         }
-        
+
+        //searchbar
+        private void Pending_SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = pending_searchTextBox.Text.ToLower(); // Convert to lowercase for case-insensitive search
+
+            foreach (Applicant item in pending_ListView.Items)
+            {
+                if (item.Official_Name.ToLower().Contains(searchText) ||
+                    item.ApplicantEssay.ToLower().Contains(searchText) ||
+                    item.Age.ToString().ToLower().Contains(searchText) ||
+                    item.Email.ToLower().Contains(searchText) ||
+                    item.Timestamp.ToLower().Contains(searchText) ||
+                    item.Time_of_Update.ToLower().Contains(searchText) ||
+                    item.Sex.ToLower().Contains(searchText) ||
+                    item.Government_ID.ToString().ToLower().Contains(searchText) ||
+                    item.Government_ID_Photo.ToLower().Contains(searchText) ||
+                    item.PaySlipImage.ToLower().Contains(searchText) ||
+                    item.Occupation.ToLower().Contains(searchText) ||
+                    item.LoanAmount.ToString().ToLower().Contains(searchText) ||
+                    item.LoanDuration.ToLower().Contains(searchText) ||
+                    item.Status.ToLower().Contains(searchText) ||
+                    item.PhoneNo.ToString().ToLower().Contains(searchText) 
+                    )
+                {
+                    // Item matches the search string, make it visible
+                    ((ListViewItem)pending_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    // Item doesn't match the search string, make it not visible
+                    ((ListViewItem)pending_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+        private void Rejected_SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = rejected_searchTextBox.Text.ToLower(); // Convert to lowercase for case-insensitive search
+
+            foreach (Applicant item in rejected_ListView.Items)
+            {
+                if (item.Official_Name.ToLower().Contains(searchText) ||
+                    item.ApplicantEssay.ToLower().Contains(searchText) ||
+                    item.Age.ToString().ToLower().Contains(searchText) ||
+                    item.Email.ToLower().Contains(searchText) ||
+                    item.Timestamp.ToLower().Contains(searchText) ||
+                    item.Time_of_Update.ToLower().Contains(searchText) ||
+                    item.Sex.ToLower().Contains(searchText) ||
+                    item.Government_ID.ToString().ToLower().Contains(searchText) ||
+                    item.Government_ID_Photo.ToLower().Contains(searchText) ||
+                    item.PaySlipImage.ToLower().Contains(searchText) ||
+                    item.Occupation.ToLower().Contains(searchText) ||
+                    item.LoanAmount.ToString().ToLower().Contains(searchText) ||
+                    item.LoanDuration.ToLower().Contains(searchText) ||
+                    item.Status.ToLower().Contains(searchText) ||
+                    item.PhoneNo.ToString().ToLower().Contains(searchText)
+                    )
+                {
+                    // Item matches the search string, make it visible
+                    ((ListViewItem)rejected_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    // Item doesn't match the search string, make it not visible
+                    ((ListViewItem)rejected_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+        private void Accepted_SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = accepted_searchTextBox.Text.ToLower(); // Convert to lowercase for case-insensitive search
+
+            foreach (Applicant item in accepted_ListView.Items)
+            {
+                if (item.Official_Name.ToLower().Contains(searchText) ||
+                    item.ApplicantEssay.ToLower().Contains(searchText) ||
+                    item.Age.ToString().ToLower().Contains(searchText) ||
+                    item.Email.ToLower().Contains(searchText) ||
+                    item.Timestamp.ToLower().Contains(searchText) ||
+                    item.Time_of_Update.ToLower().Contains(searchText) ||
+                    item.Sex.ToLower().Contains(searchText) ||
+                    item.Government_ID.ToString().ToLower().Contains(searchText) ||
+                    item.Government_ID_Photo.ToLower().Contains(searchText) ||
+                    item.PaySlipImage.ToLower().Contains(searchText) ||
+                    item.Occupation.ToLower().Contains(searchText) ||
+                    item.LoanAmount.ToString().ToLower().Contains(searchText) ||
+                    item.LoanDuration.ToLower().Contains(searchText) ||
+                    item.Status.ToLower().Contains(searchText) ||
+                    item.PhoneNo.ToString().ToLower().Contains(searchText)
+                    )
+                {
+                    // Item matches the search string, make it visible
+                    ((ListViewItem)accepted_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    // Item doesn't match the search string, make it not visible
+                    ((ListViewItem)accepted_ListView.ItemContainerGenerator.ContainerFromItem(item)).Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
     }
-    
+
 }
