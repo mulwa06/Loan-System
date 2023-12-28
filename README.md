@@ -2,11 +2,17 @@
 
 This is a desktop application for windows that utilizes several features that I'll list below to handle loan applications made via Google Forms within the desktop application. 
 
+1. Sample view of the main window 
 ![1702368571457](https://github.com/mulwa06/Loan-System/assets/91142002/e54ef9e6-b896-440a-8010-1b08dfe45bdb)
 
+2. Sample view of the two windows 
 ![1702368667270](https://github.com/mulwa06/Loan-System/assets/91142002/3b559d04-c095-41f2-86d5-5e2b5044f75d)
 
+3. Videos
+
+Click on the two videos below to watch how to use the app:
 [loan system 1.webm](https://github.com/mulwa06/Loan-System/assets/91142002/c60d0da1-0266-443b-bc9c-e079fb5616b0)
+
 [loan system 2.webm](https://github.com/mulwa06/Loan-System/assets/91142002/a4381719-a68c-404e-b465-f24508e404af)
 
 ## Features
@@ -18,13 +24,14 @@ Here are some of the features the app has been built with:
 3. C#
 4. Windows Presentation Forms
 
-## Download
+## Download & Use
 
 To download and use the application; 
 - click on the Release for this repository
 - download the "Source Code.zip file"
 - extract the zip file
 - click on the "loan system.exe" to launch the app
+- click on "refresh button" to load the applications
 
 ## Possible additions
 
