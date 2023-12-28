@@ -11,6 +11,7 @@ This is a desktop application for windows that utilizes several features that I'
 3. Videos
 
 Click on the two videos below to watch how to use the app:
+
 [loan system 1.webm](https://github.com/mulwa06/Loan-System/assets/91142002/c60d0da1-0266-443b-bc9c-e079fb5616b0)
 
 [loan system 2.webm](https://github.com/mulwa06/Loan-System/assets/91142002/a4381719-a68c-404e-b465-f24508e404af)
